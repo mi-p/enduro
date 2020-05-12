@@ -1,0 +1,19 @@
+{% extends "layout.html" %}
+
+{% block title %}Home - Search{% endblock %}
+
+
+{% block heading %}
+    Welcome booklover {{ session.get('user') }}
+{% endblock %}
+
+
+{% block body %}
+  What book do you want to find?
+  <form class="" action={{ url_for('search_result') }} method="post">
+    <input type="text" name="title" value="" placeholder="Title" autofocus>
+    <input type="text" name="author" value="" placeholder="Author">
+    <input type="text" name="number" value="" placeholder="ISBN">
+    <button type="submit" name="button">Search</button>
+  </form>
+{% endblock %}

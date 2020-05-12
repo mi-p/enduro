@@ -1,0 +1,19 @@
+{% extends "layout.html" %}
+
+{% block title %}Login{% endblock %}
+
+
+{% block heading %}
+    {{ message }}
+{% endblock %}
+
+
+{% block body %}
+  <form class="" action="{{ url_for('login_check') }}" method="post">
+    <input type="text" name="name" value="" placeholder="Username" autofocus>
+    <input type="password" name="password" value="" placeholder="Password">
+    <button type="submit" name="Login" value=1>Login</button>
+    <button type="submit" name="Register" formaction="{{ url_for('register_post') }}">Register</button>
+  </form>
+
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+
+{% block title %}Add Review{% endblock %}
+
+
+{% block heading %}
+    Review of "{{ session["book"][1] }}" by {{ session["book"][2] }}
+{% endblock %}
+
+
+{% block body %}
+  <form class="" action={{ url_for("add_review", isbn=session["book"][0]) }} method="post">
+    <textarea type="text" name="review" value="" rows=6 cols=100 autofocus></textarea><br>
+    <input type="radio" id="1" name="score" value="1">
+    <label for="1">1</label>
+    <input type="radio" id="2" name="score" value="2">
+    <label for="2">2</label>
+    <input type="radio" id="3" name="score" value="3">
+    <label for="3">3</label>
+    <input type="radio" id="4" name="score" value="4">
+    <label for="4">4</label>
+    <input type="radio" id="5" name="score" value="5">
+    <label for="5">5</label>
+    <input type="hidden" name="isbn" value="{{ isbn }}">
+    <br>
+    <button type="submit" name="button">Submit</button>
+    <button type="submit" formaction="{{ url_for("book", isbn=isbn)}}">Cancel</button>
+  </form>
+
+{% endblock %}

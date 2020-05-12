@@ -1,0 +1,65 @@
+{% extends "layout.html" %}
+
+{% block title %}Book details{% endblock %}
+
+
+{% block heading %}
+    Details of "{{ book[1] }}" by {{ book[2] }}
+{% endblock %}
+
+
+{% block body %}
+  Title: {{ book[1] }}<br>
+  Author: {{ book[2] }}<br>
+  ISBN: {{ book[0] }}<br>
+  Publication year: {{ book[3] }}<br>
+  Average score: {{ book[5] }}<br>
+  Number of reviews: {{ book[4] }}<br>
+  Number of Goodreads reviews: {{ gr["work_ratings_count"]}}<br>
+  Goodreads average score: {{ gr["average_rating"] }}<br>
+
+  {% if already == None %}
+    <form class="" action={{ url_for("add_review", isbn=book[0]) }} method="post">
+      <br>
+      Please add your review:
+      <br>
+      <textarea type="text" name="review" value="" rows=6 cols=70 autofocus></textarea><br>
+      Please rate the book:
+      <input type="radio" id="1" name="score" value="1">
+      <label for="1">1</label>
+      <input type="radio" id="2" name="score" value="2">
+      <label for="2">2</label>
+      <input type="radio" id="3" name="score" value="3" checked>
+      <label for="3">3</label>
+      <input type="radio" id="4" name="score" value="4">
+      <label for="4">4</label>
+      <input type="radio" id="5" name="score" value="5">
+      <label for="5">5</label>
+      <input type="hidden" name="isbn" value="{{ isbn }}">
+      <br>
+      <button type="submit" name="button">Submit review</button>
+      <!-- <button type="submit" formaction="{{ url_for("book", isbn=isbn)}}">Cancel</button> -->
+    </form>
+  {% else %}
+    <br>
+    <br>
+    User may add only one review
+    <br>
+  {% endif %}
+  <form class="" action="{{ url_for('search_result') }}" method="POST">
+    <button type="submit" name="button" href="">Back to search results</button>
+  </form>
+  <form class="" action={{ url_for('index') }} method="get">
+    <button type="submit" name="button">Back to new search</button>
+  </form>
+
+{% if reviews != [] %}
+<br>
+  Users' reviews <br>
+  {% for row in reviews %}
+  Score: {{row[3]}} out of 5 - {{row[4]}}; by {{ row[6] }}<br>
+  {% endfor %}
+{% endif %}
+
+
+{% endblock %}

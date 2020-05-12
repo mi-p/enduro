@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>{% block title %}{% endblock %}</title>
+        <link rel="stylesheet" href="{{url_for('static', filename="style.css")}}">
+        <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    </head>
+    <body style="background-image: url('{{url_for('static', filename='jason-leung-MisSelG2Xj4-unsplash (copy).jpg')}}');">
+      <!--Photo by Jason Leung on Unsplash-->
+      <div style="width: 800px; margin:auto;">
+        {% if session['login']==1: %}
+          <div style="text-align:right">
+            <form class="" action={{ url_for('logout') }} method="post">
+              <button type="submit" name="button">Logout</button>
+            </form>
+          </div>
+        {% endif %}
+        <h1>{% block heading %}{% endblock %}</h1>
+
+        {% block body %}
+        {% endblock %}
+      </div>
+
+    </body>
+</html>
