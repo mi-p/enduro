@@ -1,0 +1,62 @@
+@import "https://indestructibletype.com/fonts/Jost.css";
+@import url("https://fonts.googleapis.com/css?family=Libre+Baskerville&display=swap");
+@media (min-width: 576px) {
+  .picture {
+    width: 75%; } }
+@media (max-width: 575px) {
+  .picture {
+    width: 100%; } }
+#home {
+  font-weight: bold; }
+
+.brown {
+  color: chocolate; }
+
+* {
+  font-family: 'Libre Baskerville', serif; }
+
+h3, .nav {
+  font-family: "Jost"; }
+
+nav {
+  align: center;
+  text-transform: uppercase;
+  background-color: #6fbef2;
+  margin: 0px 0px 15px 0px; }
+  nav .btn {
+    margin: 5px 5px 5px 15px;
+    background-color: #3992cc; }
+  nav #home {
+    background-color: royalblue; }
+
+.news, .breaking {
+  margin-top: 10px; }
+
+.breaking {
+  border-color: crimson;
+  border-radius: 10px;
+  border-width: thick;
+  border-style: solid; }
+
+article > div:nth-child(2) {
+  padding-top: 10px; }
+
+ul {
+  list-style-type: none;
+  text-transform: capitalize; }
+
+table {
+  font-family: "Jost";
+  font-weight: 200; }
+
+table tr:first-child td {
+  background-color: lightGray;
+  font-weight: 600; }
+
+table tr:not(:first-child) td:first-child {
+  background-color: lavender;
+  font-weight: 400; }
+
+/*add inheritance*/
+
+/*# sourceMappingURL=style.css.map */
