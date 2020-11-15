@@ -1,0 +1,14 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% block title %}
+CS50 Wiki: Search
+{% endblock %}
+
+{% block body %}
+<form action="{% url 'search' %}" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit">
+</form>    
+
+{% endblock %}
