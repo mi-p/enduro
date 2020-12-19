@@ -1,0 +1,66 @@
+.author {
+    color: rgb(49, 135, 163);
+    display: inline-block;
+    font-weight: 900;
+    text-decoration: underline;
+}
+
+.timestamp {
+    color: rgb(149, 149, 150);
+    display: inline-block;
+    font-weight: 100;
+}
+
+.body {
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.post {
+    border-style: solid;
+    border-width: 1px;
+    border-color: lightgrey;
+    border-radius: 10px;
+    background-color: #d9ebf5;
+}
+
+.content {
+    border-color: black;
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 10px;
+    width: 99%;
+    display: inline-block;
+    margin: 5px;
+    padding: 10px;
+    background-color: rgb(255, 253, 249);
+}
+
+.btn-danger {
+    background-color: #f9a7b0;
+}
+
+.btn-info {
+    background-color: #77bfc7;
+}
+
+#post-input {
+    border-style: solid;
+    border-width: 1px;
+    border-color: lightgrey;
+    border-radius: 10px;
+    background-color: #d6fccd;
+}
+
+#post-content {
+    border-color: black;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 10px;
+    width: 99%;
+    display: inline-block;
+    margin: 5px;
+    padding: 10px;
+    background-color: rgb(255, 253, 249);
+}

@@ -1,0 +1,76 @@
+{% extends "network/layout.html" %}
+
+{% block body %}
+    <script>
+        let mod = "{{ mod }}"
+    </script>
+    
+    <div id="profile-top">
+        {% if prof %}
+            <b>{{ prof.username }}</b>
+            <p>Follows {{ prof.number_of_followed }} </br>
+            Followed by <span id="fr_number">{{ prof.number_of_followers }}</span></p>
+            {% if btn_show %}
+                <button onclick="follow_change(name='{{ prof.username }}', mod=mod)" id="btn_follow">{{ btn_value }}</button>
+            {% endif %}
+        {% endif %}
+    </div>
+
+    <!-- Post window -->
+    {% if user.is_authenticated %}
+    </br>
+    <div id="post-input">
+        Provide post content:
+        <form id="new-post" action="{% url 'create_post' %}" method="POST">
+            {% csrf_token %}
+            <textarea class="form-control" id="post-content" placeholder="content" name="content"></textarea>
+            <input type="submit" class="btn btn-primary" value="Submit post"/>
+        </form>
+    </div>
+    {% endif %}
+
+    </br>
+    {% if posts.has_other_pages %}
+        <ul class="pagination">
+        {% if posts.has_previous %}
+            <li class="page-item"><a class="page-link" href="?page={{ posts.previous_page_number }}">&laquo;</a></li>
+        {% else %}
+            <li class="disabled page-item"><span class="page-link">&laquo;</span></li>
+        {% endif %}
+        {% for i in posts.paginator.page_range %}
+            {% if posts.number == i %}
+                <li class="active page-item"><span class="page-link">{{ i }} <span class="sr-only">(current)</span></span></li>
+            {% else %}
+                <li><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+            {% endif %}
+        {% endfor %}
+
+        {% if posts.has_next %}
+            <li><a class="page-link" href="?page={{ posts.next_page_number }}">&raquo;</a></li>
+        {% else %}
+            <li class="disabled"><span class="page-link">&raquo;</span></li>
+        {% endif %}
+        </ul>
+    {% endif %}
+
+    <div id="posts">
+        {% for post in posts %}
+            <div class="post">
+                {% if user.is_authenticated %}
+                <div class="author" onclick="location.href='{% url 'profile' name=post.author %}';" data-auth_name="{{ post.author }}">{{ post.author }}</div>
+                {% else %}
+                <div class="author">{{ post.author }}</div>
+                {% endif %}
+                <div class="timestamp">{{ post.time_stamp }}</div>
+                <div class="content" id="post-{{post.id}}">{{ post.content }}</div></br>
+                {% if user.is_authenticated %}
+                <button class="btn btn-danger" id="lb{{ post.id }}" onclick="like_change(post_id='{{ post.id }}', mod='{{ post.mod }}')">{{ post.lb }}</button>
+                <span style="color:rgb(182, 32, 32);font-size:18pt">&hearts;</span><span id="lc{{ post.id }}"> {{ post.likes_counter }} </span>
+                {% endif %}
+                {% if post.author|stringformat:"s" == user.username|stringformat:"s" %}
+                <button class="btn btn-info" onclick="edit_post({{ post.id }});">Edit</button>
+                {% endif %}
+            </div></br>
+        {% endfor %}
+    </div>
+{% endblock %}
