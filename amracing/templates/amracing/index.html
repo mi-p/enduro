@@ -1,0 +1,37 @@
+{% extends "amracing/layout.html" %}
+
+{% block body %}
+    <div id="profile-top">
+    <div hidden=True id="js-data" data-race-id="0"></div> 
+    </div>
+    {% if request.user.is_authenticated %}
+    <button onclick="visibility_change('race-form');set_now()" class="btn btn-primary">Create race</button>
+    <div id="race-form" style="display: none;" action="{% url 'race' race_id='n' %}" method="POST"></br>
+        <form class="row" method="POST">
+            <label for="race-name" class="col-xl-1">Race name:</label>
+            <input type="text" id="race-name" class="form-control col-xl-4">
+            <label for="race-date" class="col-sm-6 col-md-3 col-xl-1">Race date:</label>
+            <input type="date" id="race-date" class="form-control col-sm-6 col-md-3 col-xl-2" value="">
+             <label for="race-time" class="col-sm-6 col-md-3 col-xl-1">Race time:</label>
+            <input type="time" id="race-time" class="form-control col-sm-6 col-md-3 col-xl-1">
+            <input type="submit" value="Create Race" class="col-xl-2">
+        </form>
+    </div>
+</br>
+    {% endif %}
+    <div class="row">
+        <div id="races-upcoming" class="col-md-6">
+            <strong>Upcoming races:</strong>
+            {% for race in races_incoming %}
+                <div><a href="{% url 'race' race_id=race.id %}">{{ race.name }}</a></div>
+            {% endfor %}
+        </div>
+        <div id="races-finished" class="col-md-6">
+            <strong>Finished races:</strong>
+            {% for race in races_finished %}
+                <div><a href="{% url 'race' race_id=race.id %}">{{ race.name }}</a></div>
+            {% endfor %}
+        </div>
+    </div>
+
+{% endblock %}
