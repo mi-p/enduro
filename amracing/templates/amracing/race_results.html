@@ -1,0 +1,18 @@
+{% extends "amracing/layout.html" %}
+
+{% block body %}
+    <div id="profile-top">
+    </div>
+    Race start: {{ start|date:'H:i:s' }}</br>
+    Temporary results:</br>
+    {% for result in results %}
+        <div>
+        {{ result.attendee.race_number }} - {{ result.lap_time|date:'H:i:s' }}
+        </div>
+    {% endfor %}
+    <button class="btn btn-primary" onclick="location.href='{% url 'export' race_id=race_id %}'">Export results</button>
+
+
+
+
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends "amracing/layout.html" %}
+{% load static %}
+
+{% block body %}
+    <!-- Only numeric keyboard -->
+    <div hidden=True id="js-data" data-race-id="{{ race_id }}" data-results="{{ results }}"></div> 
+    <div style="text-align:center;font-weight: 700;">{{ race_name }}</div>
+    <div class="row justify-content-center">
+        <div class="pin-login" id="mainPinLogin">
+            <input type="text" class="pin-login__text" autofocus>
+            <div class="pin-login__numpad">
+            </div>
+        </div>
+    </div>
+    <script src="{% static 'keyboard/keyboard.js' %}" charset="utf-8"></script>
+    <button onclick="location.href='../race/{{ race_id }}'" class="btn btn-secondary">Back</button>
+
+{% endblock %}
