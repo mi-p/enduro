@@ -1,0 +1,39 @@
+{% extends "amracing/layout.html" %}
+
+{% block body %}
+    <div style="font-weight: 700;">{{ user }}</div>
+    <div id="profile-top" style="margin:10px;">
+        About racer:            <Button onclick="about_visibility_change()" class="btn btn-outline-primary" id="about-button">&#9660; Show</Button>
+
+        <div id="user-about" style="display: none;">
+            {% if request.user == user %}
+            <form id="about-form"  class="row" action="{% url 'profile' username=user %}">
+                <label for="user-about-input" class="col-md-2">About me:</label>
+                <input type="text" id="user-about-input" class="col-md-10" value="{{ user.info }}">
+                <label for="user-number-input" class="col-md-2">My favourite number:</label>
+
+                <input type="text" id="user-number-input" class="col-md-10" value="{{ user.favourite_race_number }}">
+
+                <input type="submit" value="Save changes" class="col-md-2 btn btn-secondary">
+            </form>
+            {% else %}
+                {{ user.info }}
+            {% endif %}
+        </div>
+    </div>
+    <div class="row" style="border-top-style:solid;border-top-width: 1px;">
+        <div id="races-upcoming" class="col-md-6">
+            Upcoming races:
+            {% for race in races_incoming %}
+                <div><a href="{% url 'race' race_id=race.race.id %}">{{ race.race.name }}</a></div>
+            {% endfor %}
+        </div>
+        <div id="races-finished" class="col-md-6">
+            Finished races:
+            {% for race in races_finished %}
+                <div><a href="{% url 'race' race_id=race.race.id %}">{{ race.race.name }}</a></div>
+            {% endfor %}
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,121 @@
+/* Based on PIN Pad Login Screen in JavaScript by dcode - https://codepen.io/dcode-software/pen/orXrXQ */
+
+* {
+  box-sizing: border-box;
+}
+
+.pin-login {
+    display: inline-block;
+    border-radius: 10px;
+    padding: 10px;
+    font-size: 28px;
+    background: #d9deff;
+    border: 1px solid #363b5e;
+    user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -webkit-user-select: none;
+    font-family: sans-serif;
+    font-weight: bold;
+  }
+  .pin-login__text {
+    margin: 15px;
+    padding: 10px 0px;
+    display: block;
+    max-width: 240px;
+    font-size: 36px;
+    font-weight: bold;
+    text-align: center;
+    letter-spacing: 0.2em;
+    background: rgba(0, 0, 0, 0.15);
+    border: none;
+    border-radius: 10px;
+    outline: none;
+    cursor: default;
+    font-family: sans-serif;
+
+  }
+  
+  .pin-login__text--error {
+    color: #901818;
+    background: #ffb3b3;
+    animation-name: loginError;
+    animation-duration: 0.1s;
+    animation-iteration-count: 2;
+  }
+  
+  @keyframes loginError {
+    25% {
+      transform: translateX(-3px);
+    }
+    75% {
+      transform: translateX(3px);
+    }
+  }
+  
+  @-moz-keyframes loginError {
+    25% {
+      transform: translateX(-3px);
+    }
+    75% {
+      transform: translateX(3px);
+    }
+  }
+
+  .pin-login__text--ok {
+    animation-name: loginOk;
+    animation-duration: 0.2s;
+    animation-iteration-count: 1;
+  }
+  
+  @keyframes loginOk {
+    20% {
+      background: #81e240dc;
+      transform: translateY(-2px);
+    }
+    40% {
+      transform: translateY(2px);
+    }    
+    100% {
+      background: #81e240dc;
+    }
+  }
+  
+  @-moz-keyframes loginOk {
+    20% {
+      background: #81e240dc;
+      transform: translateY(-2px);
+    }
+    40% {
+      transform: translateY(2px);
+    }    
+    100% {
+      background: #81e240dc;
+    }
+  }
+
+
+  
+  .pin-login__key {
+    width: 60px;
+    height: 60px;
+    margin: 15px;
+    background: rgba(0, 0, 0, 0.15);
+    color: #363b5e;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 5%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+  
+  .pin-login__key:active {
+    background: rgba(0, 0, 0, 0.25);
+  }
+  
+.btn-primary {
+  background-color:rgba(90, 112, 133,1);
+  border-color: rgba(90, 112, 133,1);
+}
