@@ -1,0 +1,94 @@
+{% extends "amracing/layout.html" %}
+
+{% block body %}
+    <div id="profile-top">
+
+    </div>
+    <div hidden=True id="js-data" data-race-id="{{ race.id }}"></div> 
+    <div>Race: <strong>{{ race.name }}</strong> {% if finished == 0 %}on: <strong>{{ race.date|date:'d-m-Y' }}</strong>{% endif %}</div>
+    {% if admin %}
+    <button onclick="visibility_change('race-form')" class="btn btn-primary">Edit race data</button>
+    <div id="race-form" style="display: none;" action="{% url 'race' race_id='n' %}" method="POST">
+        <form class="form-inline">
+            <label for="race-name">Race name:</label>
+            <input type="text" id="race-name" class="form-control" value="{{ race.name }}">
+            <label for="race-date">Race date:</label>
+            <input type="date" id="race-date" class="form-control" value="{{ race.date|date:'Y-m-d' }}">
+            <label for="race-time">Race time:<span style="font-size: 0.8em;">(HH:MM AM/PM)</span></label>
+            <input type="time" id="race-time" class="form-control" value="{{ race.date|date:'H:i' }}">
+            <input type="submit">
+        </form>
+    </div>
+    {% endif %}
+    <div>
+        In any case please contact race administrators:</br>
+        {% for a in admin_list %}
+            <a href="{% url 'profile' username=a.username %}">{{ a.username }}</a>,
+        {% endfor %}
+    </div>  
+    </br>
+    <div class="row">
+        <div class="col-md-4">
+        {% if finished > 0 %}
+            Race results:</br>
+            {% for at in attendees %}
+            {{ at.race_number }} - finished {{ at.result_laps }} laps in: {{ at.result_time }} {% if at.user %}<a href="{% url 'profile' username=at.user.username %}">{{ at.user.username }}</a>{% endif %}</br>
+            {% endfor %}
+        {% else %}
+            Race numbers taken:</br>
+            {% for at in attendees %}
+                {{ at.race_number }} {% if at.user %}<a href="{% url 'profile' username=at.user.username %}">{{ at.user.username }}</a>{% endif %}
+                {% if admin %}<a href="javascript:del_number({{ at.race_number }})" style="color:rgb(150, 3, 40)" data-toggle="tooltip" title="Release number {{ at.race_number }}">&#x2716; </a>{% endif %}</br> 
+            {% endfor %}
+        {% endif %}
+        </div>
+
+        </br></br>
+        {% if request.user.is_authenticated %}
+
+            <div class="col-md-6">
+                {% if finished == 0 %}
+                    <div>
+                        <button onclick="visibility_change('attend-form')" class="btn btn-primary">Register to race</button>
+                        <form id="attend-form" action="{% url 'attendees' %}" method="POST" style="display: none;">
+                            <input type="text" value="{{request.user.favourite_race_number}}" id="attendee-self-number"></br>
+                            <input type="submit" value="Register and reserve race number">
+                        </form>
+                    </div>
+                    </br>
+                {% endif %}
+
+                {% if admin %}
+                    {% if finished == 0 %}
+                        <div>
+                            <Button onclick="visibility_change('attendee-form')" class="btn btn-primary">Register other Attendee</Button>
+                            <form id="attendee-form" style="display: none;">
+                                <input type="text" id="attendee-other-number"></br>
+                                <input type="submit" value="Register and reserve race number">
+                            </form>
+                        </div>
+                        </br>
+                    <div>
+                        <button onclick="visibility_change('admin-form')" class="btn btn-primary">Add race admin</button>
+                        <form id="admin-form" style="display: none;" action="{% url 'admin' %}" method="POST">
+                            <input type="text" id="admin-name"></br>
+                            <input type="submit" value="Add new admin to race">
+                        </form>
+                    </div>
+                    </br>
+                    {% endif %}
+
+                    <button onclick="location.href='../results/{{ race.id }}'" class="btn btn-primary">Show temporary results</button>
+                    </br></br>
+                    {% if finished == 0 %}
+                        <button onclick="location.href='../record/{{ race.id }}'" class="btn btn-warning">Start recording results</button>
+                    {% endif %}
+                {% endif %}
+            </div>
+        {% endif %}
+    </div>
+
+
+
+
+{% endblock %}
