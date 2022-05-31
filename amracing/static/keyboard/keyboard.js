@@ -57,7 +57,7 @@ class NumKeyboard {
             if (this.first_digit == true) {
                 var t = new Date(Date.now());
                 this.timestamp = t;
-                this.first_digit = false;            }
+                this.first_digit = false;}
         } else if (keyCode == 'Enter') {
             this.value = this.el.textDisplay.value;
             this._recordTime();
@@ -88,6 +88,7 @@ class NumKeyboard {
                         this.first_digit = false;
                     }
                 }
+                window.navigator.vibrate(50);
                 break;
         }
         this._updateValueText();
@@ -118,8 +119,10 @@ class NumKeyboard {
                     this.el.textDisplay.classList.add("pin-login__text--ok");
                     this.el.textDisplay.value = "";
                     this.first_digit = true;
+                    window.navigator.vibrate(400);
                 } else {
                     this.el.textDisplay.classList.add("pin-login__text--error");
+                    window.navigator.vibrate([200,100,200]);
                 }
             })
         }
